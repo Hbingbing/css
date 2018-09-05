@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Css</title>
+    <style>
+        body {
+            width: 60%;
+            margin: 0 auto 150px;
+            padding: 0 20px;
+        }
+        
+        div {
+            width: 50px;
+            height: 50px;
+            background: blue;
+            margin: 20px;
+        }
+        
+        .code {
+            background: #eee;
+            padding: 10px 0;
+            margin: 10px 0;
+        }
+        /* 半透明边框 */
+        
+        .opacity-border1 {
+            border: 10px solid rgba(245, 24, 24, 0.5);
+        }
+        
+        .opacity-border2 {
+            border: 10px solid rgba(245, 24, 24, 0.5);
+            background-clip: padding-box;
+        }
+        /* 多重边框 */
+        
+        .more-border1 {
+            box-shadow: 0 0 0 10px #655;
+        }
+        
+        .more-border2 {
+            box-shadow: 0 0 0 10px #655, 0 0 0 15px deeppink;
+        }
+        
+        .more-border3 {
+            box-shadow: 0 0 0 10px #655, 0 0 0 15px deeppink, 0 2px 5px 15px rgba(0, 0, 0, .6);
+        }
+        
+        .more-border4 {
+            border: 10px solid #655;
+            outline: 5px solid deeppink;
+        }
+        
+        .more-border5 {
+            border: 10px solid #655;
+            outline: 1px dashed #fff;
+            outline-offset: -10px;
+        }
+        
+        .clip {
+            clip-path: polygon(10% 25%, 35% 25%, 35% 0%, 65% 0%, 65% 25%, 90% 25%, 90% 50%, 65% 50%, 65% 100%, 35% 100%, 35% 50%, 10% 50%);
+            animation: clip 2s ease infinite;
+        }
+        
+        @keyframes clip {
+            from {
+                clip-path: polygon(10% 25%, 35% 25%, 35% 0%, 65% 0%, 65% 25%, 90% 25%, 90% 50%, 65% 50%, 65% 100%, 35% 100%, 35% 50%, 10% 50%);
+            }
+            to {
+                clip-path: polygon(10% 0%, 35% 0%, 35% 0%, 65% 0%, 65% 0%, 90% 0%, 90% 100%, 65% 100%, 65% 100%, 35% 100%, 35% 100%, 10% 100%);
+            }
+        }
+        /* 条纹背景 */
+        
+        .liner-bg {
+            background: linear-gradient(#fb3, #58a);
+        }
+        
+        .liner-bg2 {
+            background: linear-gradient(#fb3 20%, #58a 80%);
+        }
+        
+        .liner-bg3 {
+            background: linear-gradient(#fb3 50%, #58a 50%);
+        }
+        
+        .liner-bg4 {
+            background: linear-gradient(#fb3 50%, #58a 0);
+            background-size: 100% 15px;
+        }
+        
+        .liner-bg5 {
+            background: linear-gradient(#fb3 30%, #58a 0, #58a 60%, yellowgreen 0);
+            background-size: 100% 30px;
+        }
+        
+        .liner-bg6 {
+            background: linear-gradient(45deg, #fb3 25%, #58a 0, #58a 50%, #fb3 0, #fb3 75%, #58a 0);
+            background-size: 30px 30px;
+        }
+        
+        .liner-bg7 {
+            background: repeating-linear-gradient(60deg, #fb3, #fb3 15px, #58a 0, #58a 30px);
+        }
+        
+        .liner-bg8 {
+            background: #58a;
+            background-image: repeating-linear-gradient(30deg, hsla(0, 0%, 100%, .1), hsla(0, 0%, 100%, .1) 15px, transparent 0, transparent 30px);
+        }
+        /* 复杂的背景图案 */
+        /* 网格 */
+        
+        .bg1 {
+            border: 1px solid #000;
+            background: white;
+            background-image: linear-gradient(90deg, rgba(200, 0, 0, .5) 50%, transparent 0), linear-gradient( rgba(200, 0, 0, .5) 50%, transparent 0);
+            background-size: 30px 30px;
+        }
+        /* 自适应椭圆 */
+        
+        .radius1 {
+            border-radius: 50% / 100% 100% 0 0;
+        }
+        
+        .radius2 {
+            border-radius: 100% 0 0 0;
+        }
+        
+        .radius3 {
+            background: #fff;
+            border-radius: 100% 0 0 0;
+            border-width: 20px 0 0 0;
+            border-color: #000 #fff #fff #000;
+            border-style: solid;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>1 半透明边框</h2>
+    <p>
+        1. 例子1： 蓝色背景，新增红色半透明边框。当直接使用`border: 10px solid rgba(245, 24, 24, 0.2);`时，发现并不是我们想要的结果。 如下图：
+    </p>
+    <div class="opacity-border1"></div>
+    <p>
+        这是因为默认情况下，背景扩展到边框底下的，这就造成了透明边框透露出来的是底下的背景颜色，而不是我们设置的样色。 </br>加上 <pre class="code ">background-clip: padding-box; （默认值：border-box）</pre>之后，就可实现想要的效果，如下图所示：
+    </p>
+    <div class="opacity-border2 "></div>
+
+    <h2>2 多重边框</h2>
+    <h4>2.1 box-shodow</h4>
+    <p>box-shadow:第四个参数，称作“扩张半径”，通过指定正值或者负值，可以让投影面积加大或者减小。</p>
+    <p>一个正值的扩张半径加上两个零的偏移量以及零的模糊值，得到的阴影即是边框。</p>
+    <div class="more-border1"></div>
+    <p>上图的实现效果完全可以使用border属性来实现，但是box-shadow的好处在于，<em>它支持逗号分隔语法，我们可以创建任意数量的投影，即多重边框</em></p>
+    <pre class="code ">box-shadow: 0 0 0 10px #655, 0 0 0 15px deeppink;</pre>
+    <div class="more-border2"></div>
+    <p>需要注意的是，box-shadow是层层叠加的，第一层投影在最顶层，依次类推，所以，需要按照此规律扩张半径</p>
+    <pre class="code">box-shadow: 0 0 0 10px #655, 0 0 0 15px deeppink 0 2px 5px 15px rgba(0,0,0,.6);</pre>
+    <div class="more-border3"></div>
+    <ol>
+        <li>投影和边框的行为不完全一致。投影不影响布局，而且也不会受到 box-sizing 属性的影响。但是，可以通过内边距或外边距空出额外的空间来模拟边框需要占据的空间</li>
+        <li>“假”边框也不影响鼠标事件。如果有需要，请设置 box-shadow:inset，来使投影绘制在元素的内圈。</li>
+    </ol>
+
+    <h4>2.2 outline</h4>
+    <p>主要用于实现两层边框。</p>
+    <pre class="code">
+      border: 10px solid #655;
+      outline: 5px solid deeppink;
+    </pre>
+    <div class="more-border4"></div>
+    <p>除了占据空间之外，样式十分灵活，可以方便的实现虚线。同时，outline-offset 可以接受负值，实现与边框的贴合程度</p>
+    <pre class="code">
+      border: 10px solid #655;
+      outline: 1px dashed #fff;
+      outline-offset: -10px;
+    </pre>
+    <div class="more-border5"></div>
+
+    <h2>3 灵活的背景定位</h2>
+    <h4>3.1 background-position</h4>
+    <pre class="code">background-position: right 20px bottom 10px;</pre>
+    <h4>3.2 background-origin</h4>
+    <p>当偏移量等于内边距时，如下，但代码不够灵活，当修改内边距时，又得修改定位</p>
+    <pre class="code">
+      padding: 10px;
+      background: url(code-pirate.svg) no-repeat #58a;
+      background-position: right 10px bottom 10px;
+    </pre>
+    <p>更加灵活的书写应该是：</p>
+    <pre class="code">
+      padding: 10px;
+      background: url(code-pirate.svg) no-repeat #58a bottom right;
+      background-origin: content-box;
+    </pre>
+    <h4>3.3 cal()</h4>
+    <pre>
+      background: url("code-pirate.svg") no-repeat;
+      background-position: calc(100% - 20px) calc(100% - 10px);
+    </pre>
+
+    <h2>4 条纹背景</h2>
+    1. background: linear-gradient(#fb3, #58a);
+    <div class="liner-bg"></div>
+    2. background: linear-gradient(#fb3 20%, #58a 80%);
+    <div class="liner-bg2"></div>
+    3. background: linear-gradient(#fb3 50%, #58a 50%);
+    <div class="liner-bg3"></div>
+    4. 渐变是也是一种图像，所以，任何背景图像的属性他也可以使用；加上 background-size: 100% 30px;
+    <div class="liner-bg4"></div>
+    5. 为了避免每次都要修改两个百分比，可以把第二个百分比置为0，则为前一个色标值的位置。例如：background: linear-gradient(#fb3 30%, #58a 0); </br>
+    6. 超过三种颜色的条纹背景：background: linear-gradient(#fb3 33.3%, #58a 0, #58a 66.6%, yellowgreen 0);
+    <div class="liner-bg5"></div>
+    7. 有角度的渐变，只需要在新增一个角度的参数，同时重复两个渐变的色值
+    <div class="liner-bg6"></div>
+    8. 更方便的斜条纹，repeating-linear-gradient(),但是，在创建双色条纹时都需要用到四个色标。
+    <pre class="code">background: repeating-linear-gradient(60deg, #fb3, #fb3 15px, #58a 0, #58a 30px);</pre>
+    <div class="liner-bg7"></div>
+    9. 对于相同颜色只是透明度不同的渐变，可以使用同一种颜色来实现。实现原理是叠加，特别适用于对渐变不支持的情况。
+    <pre class="code">
+        background: #58a;
+        background-image: repeating-linear-gradient(30deg,
+        hsla(0,0%,100%,.1),
+        hsla(0,0%,100%,.1) 15px,
+        transparent 0, transparent 30px);
+    </pre>
+    <div class="liner-bg8"></div>
+
+    <h2>5 复杂的背景图案</h2>
+    <h4>5.1 网格</h4>
+    <pre class="code">
+      border: 1px solid #000;
+      background: white;
+      background-image: linear-gradient(90deg, rgba(200, 0, 0, .5) 50%, transparent 0), 
+                        linear-gradient( rgba(200, 0, 0, .5) 50%, transparent 0);
+      background-size: 30px 30px;
+    </pre>
+    <div class="bg1"></div>
+
+    <h2>6 自适应的椭圆</h2>
+    1. border-radius: 100px / 75px; (其中 / 分隔水平和垂直半径)；</br>
+    2. border-radius: 10px / 5px 20px; 等价于 border-radius: 10px 10px 10px 10px / 5px 20px 5px 20px;
+    <pre class="code">
+      border-radius: 50% / 100% 100% 0 0;
+    </pre>
+    <div class="radius1"></div>
+    <pre class="code">
+      border-radius: 100% 0 0 0 / 50% 0 0 0;
+    </pre>
+    <div class="radius2"></div>
+
+    <div class="radius3"></div>
+
+
+
+    <div id="test" style="width:1px;height:17px;background:#0f0;">0%</div>
+    <input type="button" value="Run" id="run" />
+
+    <div class="clip"></div>
+</body>
+<script>
+    window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+    var start = null;
+    var ele = document.getElementById("test");
+    var progress = 0;
+
+    function step(timestamp) {
+        progress += 1;
+        ele.style.width = progress + "%";
+        ele.innerHTML = progress + "%";
+        if (progress < 100) {
+            requestAnimationFrame(step);
+        }
+    }
+    requestAnimationFrame(step);
+    document.getElementById("run").addEventListener("click", function() {
+        ele.style.width = "1px";
+        progress = 0;
+        requestAnimationFrame(step);
+    }, false);
+</script>
+
+</html>
